@@ -26,7 +26,7 @@ namespace Day01
             foreach (var Instruction in Instructions)
             {
                 Turn = Instruction[0];
-                Steps = Convert.ToInt32(Instruction[1]);
+                Steps = Convert.ToInt32(Instruction.Substring(1));
 
                 // Change direction
                 switch (Direction)
