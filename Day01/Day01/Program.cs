@@ -10,8 +10,6 @@ namespace Day01
         {
             // Get Input
             string Input = File.ReadAllText("../../Input.txt");
-            // Test
-            //Input = "R8, R4, R4, R8";
             string[] Instructions = Input.Split(',');
             for (int i = 0; i < Instructions.Length; i++)
             {
@@ -22,7 +20,7 @@ namespace Day01
             int Distance2 = Part2(Instructions);
 
             Console.WriteLine("Part1: " + Distance1); // 246
-            Console.WriteLine("Part2: " + Distance2); // 30 wrong
+            Console.WriteLine("Part2: " + Distance2); // 124
         }
 
 
@@ -177,93 +175,45 @@ namespace Day01
                 switch (Direction)
                 {
                     case 'n':
-                        for (; Steps > -1; Steps--)
+                        for (; Steps > 0; Steps--)
                         {
                             Y++;
                             if (Locations.Contains((X, Y)))
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
-                            foreach(var Location in Locations)
-                            {
-                                if(Location.Item1 == X && Location.Item2 == Y)
-                                {
-                                    foreach (var element in Locations)
-                                    {
-                                        Console.WriteLine(element);
-                                    }
-                                    Console.WriteLine(X + ", " + Y);
-                                    return Math.Abs(X) + Math.Abs(Y);
-                                }
-                            }
                             Locations.Add((X, Y));
                         }
                         break;
                     case 'o':
-                        for (; Steps > -1; Steps--)
+                        for (; Steps > 0; Steps--)
                         {
                             X++;
                             if (Locations.Contains((X, Y)))
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
-                            foreach (var Location in Locations)
-                            {
-                                if (Location.Item1 == X && Location.Item2 == Y)
-                                {
-                                    foreach (var element in Locations)
-                                    {
-                                        Console.WriteLine(element);
-                                    }
-                                    Console.WriteLine(X +", "+ Y);
-                                    return Math.Abs(X) + Math.Abs(Y);
-                                }
-                            }
                             Locations.Add((X, Y));
                         }
                         break;
                     case 's':
-                        for (; Steps > -1; Steps--)
+                        for (; Steps > 0; Steps--)
                         {
                             Y--;
                             if (Locations.Contains((X, Y)))
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
-                            foreach (var Location in Locations)
-                            {
-                                if (Location.Item1 == X && Location.Item2 == Y)
-                                {
-                                    foreach (var element in Locations)
-                                    {
-                                        Console.WriteLine(element);
-                                    }
-                                    Console.WriteLine(X + ", " + Y);
-                                    return Math.Abs(X) + Math.Abs(Y);
-                                }
-                            }
                             Locations.Add((X, Y));
                         }
                         break;
                     case 'w':
-                        for (; Steps > -1; Steps--)
+                        for (; Steps > 0; Steps--)
                         {
                             X--;
                             if (Locations.Contains((X, Y)))
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
-                            }
-                            foreach (var Location in Locations)
-                            {
-                                if (Location.Item1 == X && Location.Item2 == Y)
-                                {
-                                    foreach (var element in Locations)
-                                    {
-                                        Console.WriteLine(element);
-                                    }
-                                    Console.WriteLine(X + ", " + Y);
-                                    return Math.Abs(X) + Math.Abs(Y);
-                                }
                             }
                             Locations.Add((X, Y));
                         }
