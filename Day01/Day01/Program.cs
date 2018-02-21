@@ -11,7 +11,7 @@ namespace Day01
             // Get Input
             string Input = File.ReadAllText("../../Input.txt");
             // Test
-            Input = "R8, R4, R4, R8";
+            //Input = "R8, R4, R4, R8";
             string[] Instructions = Input.Split(',');
             for (int i = 0; i < Instructions.Length; i++)
             {
@@ -22,7 +22,7 @@ namespace Day01
             int Distance2 = Part2(Instructions);
 
             Console.WriteLine("Part1: " + Distance1); // 246
-            Console.WriteLine("Part2: " + Distance2);
+            Console.WriteLine("Part2: " + Distance2); // 30 wrong
         }
 
 
@@ -184,6 +184,19 @@ namespace Day01
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
+                            foreach(var Location in Locations)
+                            {
+                                if(Location.Item1 == X && Location.Item2 == Y)
+                                {
+                                    foreach (var element in Locations)
+                                    {
+                                        Console.WriteLine(element);
+                                    }
+                                    Console.WriteLine(X + ", " + Y);
+                                    return Math.Abs(X) + Math.Abs(Y);
+                                }
+                            }
+                            Locations.Add((X, Y));
                         }
                         break;
                     case 'o':
@@ -194,6 +207,19 @@ namespace Day01
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
+                            foreach (var Location in Locations)
+                            {
+                                if (Location.Item1 == X && Location.Item2 == Y)
+                                {
+                                    foreach (var element in Locations)
+                                    {
+                                        Console.WriteLine(element);
+                                    }
+                                    Console.WriteLine(X +", "+ Y);
+                                    return Math.Abs(X) + Math.Abs(Y);
+                                }
+                            }
+                            Locations.Add((X, Y));
                         }
                         break;
                     case 's':
@@ -204,6 +230,19 @@ namespace Day01
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
+                            foreach (var Location in Locations)
+                            {
+                                if (Location.Item1 == X && Location.Item2 == Y)
+                                {
+                                    foreach (var element in Locations)
+                                    {
+                                        Console.WriteLine(element);
+                                    }
+                                    Console.WriteLine(X + ", " + Y);
+                                    return Math.Abs(X) + Math.Abs(Y);
+                                }
+                            }
+                            Locations.Add((X, Y));
                         }
                         break;
                     case 'w':
@@ -214,12 +253,26 @@ namespace Day01
                             {
                                 return Math.Abs(X) + Math.Abs(Y);
                             }
+                            foreach (var Location in Locations)
+                            {
+                                if (Location.Item1 == X && Location.Item2 == Y)
+                                {
+                                    foreach (var element in Locations)
+                                    {
+                                        Console.WriteLine(element);
+                                    }
+                                    Console.WriteLine(X + ", " + Y);
+                                    return Math.Abs(X) + Math.Abs(Y);
+                                }
+                            }
+                            Locations.Add((X, Y));
                         }
                         break;
                     default:
                         throw new Exception("Unknown direction: " + Direction);
                 }
             }
+
             return -1;
         }
     }
