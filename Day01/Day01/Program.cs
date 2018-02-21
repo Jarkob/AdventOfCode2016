@@ -10,41 +10,33 @@ namespace Day01
         {
             // Get Input
             string Input = File.ReadAllText("../../Input.txt");
+            // Test
+            Input = "R8, R4, R4, R8";
             string[] Instructions = Input.Split(',');
             for (int i = 0; i < Instructions.Length; i++)
             {
                 Instructions[i] = Instructions[i].Trim();
             }
 
+            int Distance1 = Part1(Instructions);
+            int Distance2 = Part2(Instructions);
 
+            Console.WriteLine("Part1: " + Distance1); // 246
+            Console.WriteLine("Part2: "+ Distance2);
+        }
+
+
+        private static int Part1(string[] Instructions)
+        {
             // Set up moving
             int X = 0;
             int Y = 0;
             char Direction = 'n';
             char Turn;
             int Steps;
-            int Distance1 = -1;
-            int Distance2 = -1;
-            List<(int, int)> Locations = new List<(int, int)>();
 
             foreach (var Instruction in Instructions)
             {
-                if (Distance2 == -1)
-                {
-                    // Check if location exists
-                    foreach (var Location in Locations)
-                    {
-                        if (Location.Item1 == X && Location.Item2 == Y)
-                        {
-                            Distance2 = Math.Abs(X) + Math.Abs(Y);
-                            break;
-                        }
-                    }
-
-                    // Add location
-                    Locations.Add((X, Y));
-                }
-                
                 Turn = Instruction[0];
                 Steps = Convert.ToInt32(Instruction.Substring(1));
 
@@ -114,12 +106,13 @@ namespace Day01
                         throw new Exception("Unknown direction: " + Direction);
                 }
             }
+            return Math.Abs(X) + Math.Abs(Y);
+        }
 
-            // Calculate distance
-            Distance1 = Math.Abs(X) + Math.Abs(Y);
 
-            Console.WriteLine("Part1: " + Distance1); // 246
-            Console.WriteLine("Part2: "+ Distance2);
+        public static int Part2(string[] Instructions)
+        {
+            return 0;
         }
     }
 }
