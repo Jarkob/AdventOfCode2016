@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Day01
 {
@@ -22,9 +23,28 @@ namespace Day01
             char Direction = 'n';
             char Turn;
             int Steps;
+            int Distance1 = -1;
+            int Distance2 = -1;
+            List<(int, int)> Locations = new List<(int, int)>();
 
             foreach (var Instruction in Instructions)
             {
+                if (Distance2 == -1)
+                {
+                    // Check if location exists
+                    foreach (var Location in Locations)
+                    {
+                        if (Location.Item1 == X && Location.Item2 == Y)
+                        {
+                            Distance2 = Math.Abs(X) + Math.Abs(Y);
+                            break;
+                        }
+                    }
+
+                    // Add location
+                    Locations.Add((X, Y));
+                }
+                
                 Turn = Instruction[0];
                 Steps = Convert.ToInt32(Instruction.Substring(1));
 
@@ -96,8 +116,10 @@ namespace Day01
             }
 
             // Calculate distance
-            int Distance = Math.Abs(X) + Math.Abs(Y);
-            Console.WriteLine("Distance: " + Distance);
+            Distance1 = Math.Abs(X) + Math.Abs(Y);
+
+            Console.WriteLine("Part1: " + Distance1); // 246
+            Console.WriteLine("Part2: "+ Distance2);
         }
     }
 }
