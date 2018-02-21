@@ -22,7 +22,7 @@ namespace Day01
             int Distance2 = Part2(Instructions);
 
             Console.WriteLine("Part1: " + Distance1); // 246
-            Console.WriteLine("Part2: "+ Distance2);
+            Console.WriteLine("Part2: " + Distance2);
         }
 
 
@@ -112,7 +112,115 @@ namespace Day01
 
         public static int Part2(string[] Instructions)
         {
-            return 0;
+            // Set up moving
+            int X = 0;
+            int Y = 0;
+            char Direction = 'n';
+            char Turn;
+            int Steps;
+            List<(int, int)> Locations = new List<(int, int)>();
+            Locations.Add((X, Y));
+
+            foreach (var Instruction in Instructions)
+            {
+                Turn = Instruction[0];
+                Steps = Convert.ToInt32(Instruction.Substring(1));
+
+                // Change direction
+                switch (Direction)
+                {
+                    case 'n':
+                        if (Turn == 'R')
+                        {
+                            Direction = 'o';
+                        }
+                        else
+                        { // Turn == 'L'
+                            Direction = 'w';
+                        }
+                        break;
+                    case 'o':
+                        if (Turn == 'R')
+                        {
+                            Direction = 's';
+                        }
+                        else
+                        { // Turn == 'L'
+                            Direction = 'n';
+                        }
+                        break;
+                    case 's':
+                        if (Turn == 'R')
+                        {
+                            Direction = 'w';
+                        }
+                        else
+                        { // Turn == 'L'
+                            Direction = 'o';
+                        }
+                        break;
+                    case 'w':
+                        if (Turn == 'R')
+                        {
+                            Direction = 'n';
+                        }
+                        else
+                        { // Turn == 'L'
+                            Direction = 's';
+                        }
+                        break;
+                    default:
+                        throw new Exception("Unknown direction: " + Direction);
+                }
+
+                // Take steps
+                switch (Direction)
+                {
+                    case 'n':
+                        for (; Steps > -1; Steps--)
+                        {
+                            Y++;
+                            if (Locations.Contains((X, Y)))
+                            {
+                                return Math.Abs(X) + Math.Abs(Y);
+                            }
+                        }
+                        break;
+                    case 'o':
+                        for (; Steps > -1; Steps--)
+                        {
+                            X++;
+                            if (Locations.Contains((X, Y)))
+                            {
+                                return Math.Abs(X) + Math.Abs(Y);
+                            }
+                        }
+                        break;
+                    case 's':
+                        for (; Steps > -1; Steps--)
+                        {
+                            Y--;
+                            if (Locations.Contains((X, Y)))
+                            {
+                                return Math.Abs(X) + Math.Abs(Y);
+                            }
+                        }
+                        break;
+                    case 'w':
+                        for (; Steps > -1; Steps--)
+                        {
+                            X--;
+                            if (Locations.Contains((X, Y)))
+                            {
+                                return Math.Abs(X) + Math.Abs(Y);
+                            }
+                        }
+                        break;
+                    default:
+                        throw new Exception("Unknown direction: " + Direction);
+                }
+            }
+            return -1;
         }
     }
 }
