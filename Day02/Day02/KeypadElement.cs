@@ -8,7 +8,7 @@ namespace Day02
 
         }
 
-        public KeypadElement(int Value)
+        public KeypadElement(char Value)
         {
             this.Value = Value;
         }
@@ -73,6 +73,6 @@ namespace Day02
             }
         }
 
-        public int Value { get; set; }
+        public char Value { get; set; }
     }
 }
