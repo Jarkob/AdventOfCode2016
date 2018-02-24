@@ -60,11 +60,28 @@ namespace Day04
                 // Funktioniert nicht
                 LetterFrequenciesList.Sort();
 
+                List<(char, int)> LetterFrequenciesSortedList = new List<(char, int)>();
+                while(LetterFrequenciesList.Count > 0)
+                {
+                    (char, int) TallestElement = LetterFrequenciesList[0];
+                    for (int j = 1; j < LetterFrequenciesList.Count; j++)
+                    {
+                        if (LetterFrequenciesList[j].Item2 > TallestElement.Item2)
+                        {
+                            TallestElement = LetterFrequenciesList[j];
+                        }
+                    }
+
+                    LetterFrequenciesList.Remove(TallestElement);
+                    LetterFrequenciesSortedList.Add(TallestElement);
+                }
+
+
                 // 5 größten auswählen
                 char[] MostFrequent = new char[5];
                 for (int i = 0; i < MostFrequent.Length; i++)
                 {
-                    MostFrequent[i] = LetterFrequenciesList[i].Item1;
+                    MostFrequent[i] = LetterFrequenciesSortedList[i].Item1;
                 }
 
                 // Mit Prüfsumme vergleichen
