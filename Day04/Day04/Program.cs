@@ -11,13 +11,13 @@ namespace Day04
             string[] Input = File.ReadAllLines("../../Input.txt");
 
             // Test
-            Input = null;
-            Input = new string[] {
-                "aaaaa-bbb-z-y-x-123[abxyz]",
-                "a-b-c-d-e-f-g-h-987[abcde]",
-                "not-a-real-room-404[oarel]",
-                "totally-real-room-200[decoy]"
-            };
+            //Input = null;
+            //Input = new string[] {
+            //    "aaaaa-bbb-z-y-x-123[abxyz]",
+            //    "a-b-c-d-e-f-g-h-987[abcde]",
+            //    "not-a-real-room-404[oarel]",
+            //    "totally-real-room-200[decoy]"
+            //};
 
             int Sum = 0;
 
@@ -95,7 +95,7 @@ namespace Day04
                 }
             }
 
-            Console.WriteLine("Part1: " + Sum);
+            Console.WriteLine("Part1: " + Sum); // 278221
         }
     }
 }
