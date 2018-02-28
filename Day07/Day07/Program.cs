@@ -9,6 +9,17 @@ namespace Day07
         {
             string[] Input = File.ReadAllLines("../../Input.txt");
 
+            // Test
+            Input = null;
+            Input = new string[] { "aba[bab]xyz" };
+
+            Console.WriteLine("Part1: " + Part1(Input)); // 105
+            Console.WriteLine("Part2: " + Part2(Input));
+        }
+
+
+        public static int Part1(string[] Input)
+        {
             int Tls = 0;
 
             for (int i = 0; i < Input.Length; i++)
@@ -46,7 +57,41 @@ namespace Day07
                 }
             }
 
-            Console.WriteLine("Part1: " + Tls); // 105
+            return Tls;
+        }
+
+
+        public static int Part2(string[] Input)
+        {
+            int Tls = 0;
+
+            for (int i = 0; i < Input.Length; i++)
+            {
+                for (int j = 0; j < Input[i].Length - 3; j++)
+                {
+                    if (Input[i][j] == ']' || Input[i][j] == '[')
+                    {
+                        continue;
+                    }
+
+                    if (Input[i][j] == Input[i][j + 2] && Input[i][j + 1] != Input[i][j]
+                        && Input[i][j] != ']' && Input[i][j + 1] != ']' && Input[i][j] != '[' && Input[i][j + 1] != '[')
+                    {
+                        // Alle anderen 3er Sequenzen testen
+                        for (int k = j + 3; k < Input[i].Length; k++)
+                        {
+                            if (Input[i][k] == Input[i][j]
+                                && Input[i][k + 1] == Input[i][j + 1]
+                                && Input[i][k + 2] == Input[i][j])
+                            {
+                                Tls++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return Tls; // noch nicht fertig
         }
     }
 }
