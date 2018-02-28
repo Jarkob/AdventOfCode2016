@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Day07
@@ -9,12 +10,8 @@ namespace Day07
         {
             string[] Input = File.ReadAllLines("../../Input.txt");
 
-            // Test
-            Input = null;
-            Input = new string[] { "aba[bab]xyz" };
-
             Console.WriteLine("Part1: " + Part1(Input)); // 105
-            Console.WriteLine("Part2: " + Part2(Input));
+            Console.WriteLine("Part2: " + Part2(Input)); // 474 too high 262 too high too
         }
 
 
@@ -65,33 +62,54 @@ namespace Day07
         {
             int Tls = 0;
 
+            // Neue Strategie: Alle suchen, nach in und out aufteilen und dann vergleichen
+
             for (int i = 0; i < Input.Length; i++)
             {
-                for (int j = 0; j < Input[i].Length - 3; j++)
+                char LastBracket = ']';
+                List<string> Inside = new List<string>();
+                List<string> Outside = new List<string>();
+
+                for (int j = 0; j < Input[i].Length - 2; j++)
                 {
-                    if (Input[i][j] == ']' || Input[i][j] == '[')
+                    if (Input[i][j] == '[' || Input[i][j] == ']')
                     {
+                        LastBracket = Input[i][j];
                         continue;
                     }
 
-                    if (Input[i][j] == Input[i][j + 2] && Input[i][j + 1] != Input[i][j]
-                        && Input[i][j] != ']' && Input[i][j + 1] != ']' && Input[i][j] != '[' && Input[i][j + 1] != '[')
+                    if (Input[i][j] == Input[i][j + 2]
+                        && Input[i][j] != Input[i][j + 1]
+                        && Input[i][j + 1] != ']'
+                        && Input[i][j + 1] != '[')
                     {
-                        // Alle anderen 3er Sequenzen testen
-                        for (int k = j + 3; k < Input[i].Length; k++)
+                        if (LastBracket == ']')
                         {
-                            if (Input[i][k] == Input[i][j]
-                                && Input[i][k + 1] == Input[i][j + 1]
-                                && Input[i][k + 2] == Input[i][j])
-                            {
-                                Tls++;
-                            }
+                            Outside.Add(Input[i][j] + "" + Input[i][j + 1] + "" + Input[i][j + 2]);
+                        }
+                        else if (LastBracket == '[')
+                        {
+                            Inside.Add(Input[i][j] + "" + Input[i][j + 1] + "" + Input[i][j + 2]);
+                        }
+                    }
+                }
+
+                // Jetzt prüfen
+                bool Found = false;
+                for (int k = 0; k < Inside.Count && !Found; k++) {
+                    for (int l = 0; l < Outside.Count && !Found; l++) {
+                        if(Inside[k][0] == Outside[l][1] && Inside[k][1] == Outside[l][0]) {
+                            Tls++;
+                            Found = true;
+                            break;
                         }
                     }
                 }
             }
 
-            return Tls; // noch nicht fertig
+
+
+            return Tls;
         }
     }
 }
