@@ -10,8 +10,13 @@ namespace Day08
             string[] Input = File.ReadAllLines("../../Input.txt");
 
             // Test
-            Input = null;
-            Input = new string[] { "rect 3x2" };
+            //Input = null;
+            //Input = new string[] { 
+            //    "rect 3x2",
+            //    "rotate column x=1 by 1",
+            //    "rotate row y=0 by 4",
+            //    "rotate column x=1 by 1"
+            //};
 
             // Data structure for 50px wide, 6px high screen with bool values
             int Width = 50;
@@ -30,18 +35,21 @@ namespace Day08
             int A;
             int B;
 
-            foreach(var Line in Input)
+            foreach (var Line in Input)
             {
                 Command = Line.Split(' ')[0];
 
-                switch(Command) {
+                switch (Command)
+                {
                     case "rect":
                         // Get A and B
-                        A = (int)Char.GetNumericValue(Line.Split(' ')[1][0]);
-                        B = (int)Char.GetNumericValue(Line.Split(' ')[1][2]);
+                        A = Convert.ToInt32(Line.Split(' ')[1].Split('x')[0]);
+                        B = Convert.ToInt32(Line.Split(' ')[1].Split('x')[1]);
 
-                        for (int i = 0; i < B; i++) {
-                            for (int j = 0; j < A; j++) {
+                        for (int i = 0; i < B; i++)
+                        {
+                            for (int j = 0; j < A; j++)
+                            {
                                 Screen[i][j] = true;
                             }
                         }
@@ -49,15 +57,17 @@ namespace Day08
                     case "rotate":
                         Command = Line.Split(' ')[1];
 
-                        switch(Command) {
+                        // Get A and B
+                        A = Convert.ToInt32(Line.Split(' ')[2].Split('=')[1]);
+                        B = Convert.ToInt32(Line.Split(' ')[4]);
+
+                        switch (Command)
+                        {
                             case "row":
-                                // Get A and B
-                                A = (int)Char.GetNumericValue(Line.Split(' ')[2][2]);
-                                B = (int)Char.GetNumericValue(Line.Split(' ')[4][0]);
-                                // Wird so nicht gehen, siehe Fall A oder B >= 10
+                                RotateRow(ref Screen, A, B);
                                 break;
                             case "column":
-                                // Get A and B
+                                RotateColumn(ref Screen, A, B);
                                 break;
                             default:
                                 throw new Exception("Unknown command: " + Command);
@@ -69,12 +79,70 @@ namespace Day08
             }
 
             PrintScreen(Screen);
+
+            Console.WriteLine("Part1: "+ GetLitPixels(Screen));
+        }
+
+
+        public static void RotateRow(ref bool[][] Screen, int A, int B)
+        {
+            bool Swap;
+
+            for (int i = 0; i < B; i++)
+            {
+                Swap = Screen[A][Screen[A].Length - 1];
+                Screen[A][Screen[A].Length - 1] = Screen[A][0];
+                Screen[A][0] = Swap;
+
+                for (int j = Screen[A].Length - 1; j > 1; j--)
+                {
+                    Swap = Screen[A][j];
+                    Screen[A][j] = Screen[A][j - 1];
+                    Screen[A][j - 1] = Swap;
+                }
+            }
+        }
+
+
+        public static void RotateColumn(ref bool[][] Screen, int A, int B)
+        {
+            bool Swap;
+
+            for (int i = 0; i < B; i++)
+            {
+                Swap = Screen[Screen.Length - 1][A];
+                Screen[Screen.Length - 1][A] = Screen[0][A];
+                Screen[0][A] = Swap;
+
+                for (int j = Screen.Length - 1; j > 1; j--)
+                {
+                    Swap = Screen[j][A];
+                    Screen[j][A] = Screen[j - 1][A];
+                    Screen[j - 1][A] = Swap;
+                }
+            }
+        }
+
+
+        public static int GetLitPixels(bool[][] Screen)
+        {
+            int LitPixels = 0;
+
+            foreach (var Row in Screen)
+            {
+                foreach (var Pixel in Row)
+                {
+                    if (Pixel) { LitPixels++; }
+                }
+            }
+
+            return LitPixels;
         }
 
 
         public static void PrintScreen(bool[][] Screen)
         {
-            foreach(var Row in Screen)
+            foreach (var Row in Screen)
             {
                 foreach (var Pixel in Row)
                 {
