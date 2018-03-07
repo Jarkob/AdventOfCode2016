@@ -9,16 +9,6 @@ namespace Day08
         {
             string[] Input = File.ReadAllLines("../../Input.txt");
 
-            // Test
-            //Input = null;
-            //Input = new string[] { 
-            //    "rect 3x2",
-            //    "rotate column x=1 by 1",
-            //    "rotate row y=0 by 4",
-            //    "rotate column x=1 by 1"
-            //};
-
-            // Data structure for 50px wide, 6px high screen with bool values
             int Width = 50;
             int Height = 6;
 
@@ -28,9 +18,6 @@ namespace Day08
                 Screen[i] = new bool[Width];
             }
 
-            PrintScreen(Screen);
-
-            // Execute commands
             string Command;
             int A;
             int B;
@@ -78,9 +65,10 @@ namespace Day08
                 }
             }
 
-            PrintScreen(Screen);
+            Console.WriteLine("Part1: "+ GetLitPixels(Screen)); // 121
 
-            Console.WriteLine("Part1: "+ GetLitPixels(Screen));
+            Console.WriteLine("Part2: ");
+            PrintScreen(Screen); // RURUCEOEIL
         }
 
 
