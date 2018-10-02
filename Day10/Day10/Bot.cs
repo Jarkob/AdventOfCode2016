@@ -59,7 +59,9 @@ namespace Day10
             if (!this.HighBot || !this.LowBot)
             {
                 Console.WriteLine("KEIN BOT");
-            } else {
+            }
+            else
+            {
                 Console.WriteLine("BOT");
             }
 
@@ -70,6 +72,11 @@ namespace Day10
                 if (this.LowBot)
                 {
                     // give low to bot
+                    if (!this.Bots.ContainsKey(LowId))
+                    {
+                        this.Bots.Add(LowId, new Bot(Bots, Output, LowId));
+                    }
+
                     this.Bots[LowId].GiveMicrochip(this.Microchips[1]);
                 }
                 else
@@ -88,6 +95,11 @@ namespace Day10
                 if (this.HighBot)
                 {
                     // give high to bot
+                    if (!this.Bots.ContainsKey(HighId))
+                    {
+                        this.Bots.Add(HighId, new Bot(Bots, Output, HighId));
+                    }
+
                     this.Bots[HighId].GiveMicrochip(this.Microchips[0]);
                 }
                 else
@@ -108,6 +120,11 @@ namespace Day10
                 if (this.LowBot)
                 {
                     // give low to bot
+                    if (!this.Bots.ContainsKey(LowId))
+                    {
+                        this.Bots.Add(LowId, new Bot(Bots, Output, LowId));
+                    }
+
                     this.Bots[LowId].GiveMicrochip(this.Microchips[0]);
                 }
                 else
@@ -126,6 +143,10 @@ namespace Day10
                 if (this.HighBot)
                 {
                     // give high to bot
+                    if(!this.Bots.ContainsKey(HighId)) {
+                        this.Bots.Add(HighId, new Bot(Bots, Output, HighId));
+                    }
+
                     this.Bots[HighId].GiveMicrochip(this.Microchips[1]);
                 }
                 else
