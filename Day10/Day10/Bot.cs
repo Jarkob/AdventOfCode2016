@@ -40,6 +40,8 @@ namespace Day10
             this.HighBot = highBot;
             this.HighId = highId;
 
+            this.Instruction = true;
+
             if (this.Microchips[0] != -1 && this.Microchips[1] != -1)
             {
                 this.Execute();
@@ -48,127 +50,118 @@ namespace Day10
 
         private void Execute()
         {
-            //if ((this.Microchips[0] == 5 && this.Microchips[1] == 2) || (this.Microchips[0] == 2 && this.Microchips[1] == 5))
-            if ((this.Microchips[0] == 61 && this.Microchips[1] == 17) || (this.Microchips[0] == 17 && this.Microchips[1] == 61))
+            if (this.Instruction)
             {
-                Console.WriteLine("Part1: " + this.Id);
-            }
-
-            // debug
-            // give to output
-            if (!this.HighBot || !this.LowBot)
-            {
-                Console.WriteLine("KEIN BOT");
-            }
-            else
-            {
-                Console.WriteLine("BOT");
-            }
-
-            Console.WriteLine("EXECUTE");
-
-            if (this.Microchips[0] > this.Microchips[1])
-            {
-                if (this.LowBot)
+                if ((this.Microchips[0] == 61 && this.Microchips[1] == 17) || (this.Microchips[0] == 17 && this.Microchips[1] == 61))
                 {
-                    // give low to bot
-                    if (!this.Bots.ContainsKey(LowId))
-                    {
-                        this.Bots.Add(LowId, new Bot(Bots, Output, LowId));
-                    }
-
-                    this.Bots[LowId].GiveMicrochip(this.Microchips[1]);
+                    Console.WriteLine("Part1: " + this.Id);
+                    // 161
                 }
-                else
+
+                if (this.Microchips[0] > this.Microchips[1])
                 {
-                    // give low to output
-                    if (this.Output.ContainsKey(LowId))
+                    if (this.LowBot)
                     {
-                        this.Output[LowId] = this.Microchips[1];
+                        // give low to bot
+                        if (!this.Bots.ContainsKey(LowId))
+                        {
+                            this.Bots.Add(LowId, new Bot(Bots, Output, LowId));
+                        }
+
+                        this.Bots[LowId].GiveMicrochip(this.Microchips[1]);
                     }
                     else
                     {
-                        this.Output.Add(LowId, this.Microchips[1]);
+                        // give low to output
+                        if (this.Output.ContainsKey(LowId))
+                        {
+                            this.Output[LowId] = this.Microchips[1];
+                        }
+                        else
+                        {
+                            this.Output.Add(LowId, this.Microchips[1]);
+                        }
                     }
-                }
 
-                if (this.HighBot)
-                {
-                    // give high to bot
-                    if (!this.Bots.ContainsKey(HighId))
+                    if (this.HighBot)
                     {
-                        this.Bots.Add(HighId, new Bot(Bots, Output, HighId));
-                    }
+                        // give high to bot
+                        if (!this.Bots.ContainsKey(HighId))
+                        {
+                            this.Bots.Add(HighId, new Bot(Bots, Output, HighId));
+                        }
 
-                    this.Bots[HighId].GiveMicrochip(this.Microchips[0]);
-                }
-                else
-                {
-                    // give high to output
-                    if (this.Output.ContainsKey(HighId))
-                    {
-                        this.Output[HighId] = this.Microchips[0];
+                        this.Bots[HighId].GiveMicrochip(this.Microchips[0]);
                     }
                     else
                     {
-                        this.Output.Add(HighId, this.Microchips[0]);
+                        // give high to output
+                        if (this.Output.ContainsKey(HighId))
+                        {
+                            this.Output[HighId] = this.Microchips[0];
+                        }
+                        else
+                        {
+                            this.Output.Add(HighId, this.Microchips[0]);
+                        }
                     }
                 }
-            }
-            else if (this.Microchips[0] < this.Microchips[1])
-            {
-                if (this.LowBot)
+                else if (this.Microchips[0] < this.Microchips[1])
                 {
-                    // give low to bot
-                    if (!this.Bots.ContainsKey(LowId))
+                    if (this.LowBot)
                     {
-                        this.Bots.Add(LowId, new Bot(Bots, Output, LowId));
-                    }
+                        // give low to bot
+                        if (!this.Bots.ContainsKey(LowId))
+                        {
+                            this.Bots.Add(LowId, new Bot(Bots, Output, LowId));
+                        }
 
-                    this.Bots[LowId].GiveMicrochip(this.Microchips[0]);
-                }
-                else
-                {
-                    // give low to output
-                    if (this.Output.ContainsKey(LowId))
-                    {
-                        this.Output[LowId] = this.Microchips[0];
+                        this.Bots[LowId].GiveMicrochip(this.Microchips[0]);
                     }
                     else
                     {
-                        this.Output.Add(LowId, this.Microchips[0]);
+                        // give low to output
+                        if (this.Output.ContainsKey(LowId))
+                        {
+                            this.Output[LowId] = this.Microchips[0];
+                        }
+                        else
+                        {
+                            this.Output.Add(LowId, this.Microchips[0]);
+                        }
                     }
-                }
 
-                if (this.HighBot)
-                {
-                    // give high to bot
-                    if(!this.Bots.ContainsKey(HighId)) {
-                        this.Bots.Add(HighId, new Bot(Bots, Output, HighId));
-                    }
-
-                    this.Bots[HighId].GiveMicrochip(this.Microchips[1]);
-                }
-                else
-                {
-                    // give high to output
-                    if (this.Output.ContainsKey(HighId))
+                    if (this.HighBot)
                     {
-                        this.Output[HighId] = this.Microchips[1];
+                        // give high to bot
+                        if (!this.Bots.ContainsKey(HighId))
+                        {
+                            this.Bots.Add(HighId, new Bot(Bots, Output, HighId));
+                        }
+
+                        this.Bots[HighId].GiveMicrochip(this.Microchips[1]);
                     }
                     else
                     {
-                        this.Output.Add(HighId, this.Microchips[1]);
+                        // give high to output
+                        if (this.Output.ContainsKey(HighId))
+                        {
+                            this.Output[HighId] = this.Microchips[1];
+                        }
+                        else
+                        {
+                            this.Output.Add(HighId, this.Microchips[1]);
+                        }
                     }
                 }
-            }
-            else
-            {
-                throw new Exception("Unexpected behavior: Bot executing but has equal value microchips");
-            }
+                else
+                {
+                    throw new Exception("Unexpected behavior: Bot executing but has equal value microchips");
+                }
 
-            // reset values
-            this.Microchips = new int[] { -1, -1 };
+                // reset values
+                this.Microchips = new int[] { -1, -1 };
+            }
         }
 
         public int Id { get; set; }
@@ -178,6 +171,8 @@ namespace Day10
         private Dictionary<int, Bot> Bots;
 
         private int[] Microchips = new int[] { -1, -1 };
+
+        private bool Instruction;
 
         private bool LowBot;
 

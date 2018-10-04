@@ -52,15 +52,12 @@ namespace Day10
                     bool HighBot = (Instruction[10] == "bot");
                     int HighId = Convert.ToInt32(Instruction[11]);
 
-                    if (Bots.ContainsKey(BotId))
-                    {
-                        Bots[BotId].GiveInstruction(LowBot, LowId, HighBot, HighId);
-                    }
-                    else
+                    if (!Bots.ContainsKey(BotId))
                     {
                         Bots.Add(BotId, new Bot(Bots, Output, BotId));
-                        Bots[BotId].GiveInstruction(LowBot, LowId, HighBot, HighId);
                     }
+
+                    Bots[BotId].GiveInstruction(LowBot, LowId, HighBot, HighId);
                 }
                 else
                 {
