@@ -65,17 +65,9 @@ namespace Day10
                 }
             }
 
-            ////// print bots
-            //foreach (var element in Bots)
-            //{
-            //    Console.WriteLine(element.Value);
-            //}
-
-            ////// print output
-            //foreach (var element in Output)
-            //{
-            //    Console.WriteLine(element);
-            //}
+            int Result = Output[0] * Output[1] * Output[2];
+            Console.WriteLine("Part2: " + Result);
+            // 133163
         }
     }
 }
